@@ -30,8 +30,14 @@ def initialize_parameters(n_features):
         "b": bias
     }
 
-# Step 3 - compute_scores (not yet solved)
-# TODO: implement
+# Step 3 - compute_scores
+import numpy as np
+
+def compute_scores(x, params):
+    """Return raw linear scores x @ w + b, shape (n_samples,)."""
+    w = params["w"]
+    b = params["b"]
+    return np.dot(x, w) + b
 
 # Step 4 - predict_from_scores (not yet solved)
 # TODO: implement
