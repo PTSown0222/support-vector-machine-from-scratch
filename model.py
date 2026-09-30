@@ -64,8 +64,32 @@ def svm_objective(x, y, params, reg_lambda):
     j = mean_hinge + reg_lambda * np.dot(w,w)
     return float(j)
 
-# Step 7 - compute_gradients (not yet solved)
-# TODO: implement
+# Step 7 - compute_gradients
+"""
+m = [0.5, -1.2, 2.0]
+[0.5 > 0, -1.2 < 0, 2.0 > 0]
+[True, False, True] -> float [1, 0, 1]
+y = [1.0, -1.0, 1.0]
+mask * y = [1.0 * 1.0, 0.0 * -1.0, 1.0 * 1.0]
+= [1.0, 0.0, 1.0]
+"""
+import numpy as np
+
+def compute_gradients(x, y, params, reg_lambda):
+    """Return {'dw': ndarray shape (n_features,), 'db': float} = gradient of svm_objective."""
+    # TODO: compute the gradient of the SVM objective wrt params['w'] and params['b'].
+    w = params["w"]
+    b = params["b"]
+    n = len(x)
+    scores = np.dot(x, w) + b
+    m = 1 - y * scores
+    mask = (m > 0).astype(float)
+    dw = - (x.T @ (mask * y)) / n + 2 * reg_lambda * w
+    db = - np.sum(mask * y) / n
+    return {
+        "dw": dw,
+        "db": db,
+    }
 
 # Step 8 - apply_update (not yet solved)
 # TODO: implement
